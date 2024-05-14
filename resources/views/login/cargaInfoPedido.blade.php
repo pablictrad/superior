@@ -169,7 +169,7 @@
       return i;
   }
 </script>
-<script src="{{ asset('js/funcionesvarias.js') }}"></script>
+ <script src="{{ asset('js/funcionesvarias.js') }}"></script>
         @if (session('ConfirmarNuevoUsuario')=='OK')
             <script>
             Swal.fire(
@@ -189,7 +189,7 @@
                 )
         </script>
     @endif
-    <script>
+  <script>
 
  
     $('.formularioNuevoUsuario').submit(function(e){

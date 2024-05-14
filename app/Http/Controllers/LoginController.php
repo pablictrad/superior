@@ -35,7 +35,8 @@ class LoginController extends Controller
         if($request->email!="" && $request->clave!=""){
             $usuario= UsuarioModel::where('email',$request->email)
             ->where('Clave',$request->clave)
-            ->join('tb_turnos_usuario', 'tb_turnos_usuario.idTurnoUsuario', 'tb_usuarios.Turno')        //no olvidar dar turno
+            ->join('tb_turnos_usuario', 'tb_turnos_usuario.idTurnoUsuario', 'tb_usuarios.Turno') 
+            ->join('tb_modos', 'tb_modos.idModo', 'tb_usuarios.Modo')        //no olvidar dar turno
             ->get();
             //dd($usuario);
             $cantidadEncontrados=count($usuario);
@@ -43,6 +44,8 @@ class LoginController extends Controller
                  //creo la session para que cargue el menu
                 session(['Usuario'=>$usuario[0]->Nombre]);
                 session(['NombreInstitucion'=>$usuario[0]->Usuario]);
+                //creo registro superio
+                session(['NombreModo'=>$usuario[0]->Descripcion]);
                 session(['idUsuario'=>$usuario[0]->idUsuario]);
                 //session(['idReparticion'=>$usuario[0]->idReparticion]); //ya no lo uso, ahora el cue esta en la misma tabla usuario
                 session(['UsuarioEmail'=>$usuario[0]->email]);
@@ -163,40 +166,40 @@ class LoginController extends Controller
     }
 
 
-    // superior registro
-    public function registro(){
+    // // superior registro
+    // public function registro(){
       
-        return view('login.registro');
-    }
-    public function crearregistro(Request $request) {
-        // Este bloque de código verifica si el usuario está intentando insertar un nuevo registro
-        if ($request->isMethod('post')) {
-            $nuevoUsuario = [
+    //     return view('login.registro');
+    // }
+    // public function crearregistro(Request $request) {
+    //     // Este bloque de código verifica si el usuario está intentando insertar un nuevo registro
+    //     if ($request->isMethod('post')) {
+    //         $nuevoUsuario = [
                     
-                'email' => $request->input('Correo'),  // Asume que el formulario tiene un campo 'email'
-                'Clave' => bcrypt($request->input('Clave')), // Cifrado de la contraseña
-                'Modo' => 8, // Puedes cambiar esto según tus necesidades
-                'created_at' => now(), // Marca la fecha de creación
-                'updated_at' => now() // Marca la fecha de actualización
-            ];
+    //             'email' => $request->input('Correo'),  // Asume que el formulario tiene un campo 'email'
+    //             'Clave' => bcrypt($request->input('Clave')), // Cifrado de la contraseña
+    //             'Modo' => 8, // Puedes cambiar esto según tus necesidades
+    //             'created_at' => now(), // Marca la fecha de creación
+    //             'updated_at' => now() // Marca la fecha de actualización
+    //         ];
     
-            // Insertar el nuevo usuario en la tabla
-            DB::table('tb_usuarios')->insert($nuevoUsuario);
+    //         // Insertar el nuevo usuario en la tabla
+    //         DB::table('tb_usuarios')->insert($nuevoUsuario);
     
-            // Puedes redirigir a alguna página o retornar un mensaje de éxito
-            return redirect()->back()->with('success', 'Usuario creado con éxito');
-        }
+    //         // Puedes redirigir a alguna página o retornar un mensaje de éxito
+    //         return redirect()->back()->with('success', 'Usuario creado con éxito');
+    //     }
     
-        // Este bloque de código obtiene todos los usuarios que no están en modo 8
-        $Usuario = DB::table('tb_usuarios')
-            ->where('Modo', '!=', 8)
-            ->get();
+    //     // Este bloque de código obtiene todos los usuarios que no están en modo 8
+    //     $Usuario = DB::table('tb_usuarios')
+    //         ->where('Modo', '!=', 8)
+    //         ->get();
     
-        $datos = [
-            'usuario' => $Usuario,
-        ];
+    //     $datos = [
+    //         'usuario' => $Usuario,
+    //     ];
     
-        // Retornar la vista para crear un nuevo usuario
-        return view('login.crearregistro', $datos);
-    }
+    //     // Retornar la vista para crear un nuevo usuario
+    //     return view('login.crearregistro', $datos);
+    // }
 }

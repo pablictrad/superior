@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('Titulo', 'Sage2.0 - Principal')
+@section('Titulo', 'ProfRegLR - Principal')
 
 @section('ContenidoPrincipal')
 

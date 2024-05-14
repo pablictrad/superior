@@ -8,6 +8,7 @@ use App\Http\Controllers\LuiController;
 use App\Http\Controllers\LupController;
 use App\Http\Controllers\AgController;
 use App\Http\Controllers\PruebaController;
+use App\Http\Controllers\RegistroSuperiorController;
 use App\Http\Controllers\SistemaController;
 use App\Http\Controllers\SubirDocController;
 use Illuminate\Support\Facades\Route;
@@ -32,8 +33,10 @@ Route::get('/servicio/ver/{id}',[ServicioGeneralController::class,'ver'])->name(
 Route::post('/servicio/guardar',[ServicioGeneralController::class,'guardar'])->name('guardar');
 */
 //cambios nuevos SUPERIOR
-Route::get('/registro',[LoginController::class,'registro'])->name('registro');
-Route::post('/crearregistro',[LoginController::class,'crearregistro'])->name('crearregistro');
+
+
+Route::get('/registro',[RegistroSuperiorController::class,'mostrarFormulario'])->name('registro');
+Route::post('/crearregistro',[RegistroSuperiorController::class,'guardarDatos'])->name('crearregistro');
 //cambios nuevos
 
 //controla las rutas de errores

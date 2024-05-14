@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('Titulo', 'Sage2.0 - Autenticacion')
+@section('Titulo', 'ProfRegLR - Autenticacion')
 
 @section('ContenidoPrincipal')
 <body class="lock-screen" onload="startTime()">

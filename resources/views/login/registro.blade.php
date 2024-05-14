@@ -59,25 +59,22 @@
                                       <!-- Fila Apellido, Nombre y Sexo -->
                                       <div class="form-group row">
                                         <div class="col-4">
-                                          <label for="Nombre">DNI (Sin Puntos): </label>
-                                          <input type="text" autocomplete="off" class="form-control" id="dni" name="dni" placeholder="Ingrese su Número de Documento"  value="">
+                                          <label for="dni">DNI (Sin Puntos): </label>
+                                          <input type="text" autocomplete="off" class="form-control" id="dni" name="Documento" placeholder="Ingrese su Número de Documento"  value="">
                                       </div>
                                           <div class="col-4">
                                               <label for="Nombre">Nombre Completo: </label>
-                                              <input type="text" autocomplete="off" class="form-control" id="Nombre" name="Nombre" placeholder="Ingrese su nombre"  value="">
+                                              <input type="text" autocomplete="off" class="form-control" id="Nombre" name="nombre" placeholder="Ingrese su nombre"  value="">
                                           </div>
                                           <div class="col-4">
                                             <label for="Nombre">Apellido: </label>
-                                            <input type="text" autocomplete="off" class="form-control" id="Nombre" name="Apellido" placeholder="Ingrese su apellido"  value="">
+                                            <input type="text" autocomplete="off" class="form-control" id="Apellido" name="apellido" placeholder="Ingrese su apellido"  value="">
                                         </div>
                                           <div class="col-4">
                                              
                                           </div>
                                           
                                           <div class="form-group">
-                                           
-                                            
-                                            
                                           </div>
                                           
                                       </div>
@@ -86,11 +83,11 @@
                                       <div class="form-group row">
                                         <div class="col-3">
                                             <label for="Correo">Correo Electronico: </label>
-                                            <input type="email" autocomplete="off" class="form-control" id="Correo" name="Correo" placeholder="Ingrese Correo Electronico" required="true">
+                                            <input type="email" autocomplete="off" class="form-control" id="Correo" name="correo" placeholder="Ingrese Correo Electronico" required="true">
                                         </div>
                                           <div class="col-3">
                                               <label for="Clave">Clave: </label>
-                                              <input type="text" autocomplete="off" class="form-control" id="Clave" name="Clave" placeholder="Ingrese una clave para autenficarse" required="true">
+                                              <input type="text" autocomplete="off" class="form-control" id="Clave" name="clave" placeholder="Ingrese una clave para autenficarse" required="true">
                                           </div>
                                            
                                           <div class="col-3">
@@ -130,52 +127,53 @@
 @endsection
 
 @section('Script')
-<script>
-  function startTime()
-  {
-      var today=new Date();
-      var h=today.getHours();
-      var m=today.getMinutes();
-      var s=today.getSeconds();
-      // add a zero in front of numbers<10
-      m=checkTime(m);
-      s=checkTime(s);
-      document.getElementById('time').innerHTML=h+":"+m+":"+s;
-      t=setTimeout(function(){startTime()},500);
-  }
+  <script>
+        function startTime()
+        {
+            var today=new Date();
+            var h=today.getHours();
+            var m=today.getMinutes();
+            var s=today.getSeconds();
+            // add a zero in front of numbers<10
+            m=checkTime(m);
+            s=checkTime(s);
+            document.getElementById('time').innerHTML=h+":"+m+":"+s;
+            t=setTimeout(function(){startTime()},500);
+        }
 
-  function checkTime(i)
-  {
-      if (i<10)
-      {
-          i="0" + i;
-      }
-      return i;
-  }
-</script>
-<script src="{{ asset('js/funcionesvarias.js') }}"></script>
+        function checkTime(i)
+        {
+            if (i<10)
+            {
+                i="0" + i;
+            }
+            return i;
+        }
+     </script>
+
+        <script src="{{ asset('js/funcionesvarias.js') }}"></script>
         @if (session('ConfirmarNuevoUsuario')=='OK')
-            <script>
+          <script>
             Swal.fire(
-                'Registro Creado',
-                'Se creo correctamente el registro de un Usuario',
+                'Excelente',
+                'Registro Creado Correctamente!!',
                 'success'
                     )
-            </script>
+          </script>
         @endif
 
         @if (session('ConfirmarNuevoUsuarioError')=='OK')
-        <script>
-        Swal.fire(
-            'Registro Cancelado',
-            'Fallo crear el registro, ya existe el turno y la extension seleccionada.',
-            'error'
-                )
-        </script>
-    @endif
-    <script>
+          <script>
+            Swal.fire(
+              'Registro Cancelado',
+              'Ya Existe Ese DNI!!. Por favor, Inicie sesión en la pantalla principal del sistema.',
+              'error'
+                  )
+          </script>
+        @endif
+   
 
- 
+ <script>
     $('.formularioNuevoUsuario').submit(function(e){
       if(
         $("#Correo").val()=="" ||  $("#Clave").val()==""){
@@ -204,5 +202,5 @@
           })
       }
     })
-</script>
+  </script>
 @endsection

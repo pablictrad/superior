@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@yield('Titulo')</title>
-
+  <link rel="icon" href="dist/img/logo.png" type="image/png">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -66,7 +66,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="SAGE2.0" height="60" width="60">
+    <img class="animation__shake" src="{{ asset('dist/img/Spinner-3.gif') }}" alt="NIVEL SUPERIOR" height="60" width="60">
   </div>
 
   <!--Hamburguesa-->
@@ -89,23 +89,22 @@
   </nav>
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar elevation-4" style="background-color: rgb(244, 244, 202)">
     <!-- Brand Logo -->
     <a href="{{route('Bandeja')}}" class="brand-link">
-      <img src="{{ asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">SAGE</span>
+      <img src="{{ asset('dist/img/logo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span style="color: black;" class="brand-text font-weight-bold">Panel Docente</span>
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" style="background-color: hsl(64, 44%, 88%);">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div style="background-color: rgb(176, 243, 206); padding-top:4%; margin: -2%;" class="user-panel mt-3 pb-3 mb-3 d-flex" >
         <div class="image">
-          <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('dist/img/user6-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image" />
         </div>
-        <div class="info">
-          <a href="#" class="d-block">{{session('Usuario')}}</a><br>
-          <a href="#" class="d-block">{{session('NombreInstitucion')}}({{session('TurnoDescripcion')}})</a>
+        <div class="info" >
+          <span style="color:black;"  class="brand-text font-weight-bold">{{session('Usuario')}}</span>
         </div>
       </div>
 
@@ -116,12 +115,132 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Inicio
-              </p>
+              <i class="nav-icon fas fa-th" style="color: rgb(50, 205, 128);"></i>
+              <span style="color: black; font-weight: bold">
+                Mi Perfil
+              </span>
             </a>
           </li>
+
+          <!--usuario docente superior-->
+          @if (session('Modo')==7)
+          <li class="nav-item menu-is-opening menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p style="color: black; font-weight: bold">
+                Legajo
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right"><!--aqui algo--></span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              {{-- <li class="nav-item">
+                <a href="{{route('verSubOrg')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Instituci&oacuten</p>
+                </a>
+              </li> --}}
+              <li class="nav-item">
+                <a href="{{route('getOpcionesOrg')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="color: black; font-weight: bold">Documentación</p>
+                </a>
+              </li>
+              {{-- <li class="nav-item">
+                <a href="{{route('getCarrerasPlanes')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Carreras y Modalidades</p>
+                </a>
+              </li>  --}}
+              <li class="nav-item">
+                <a href="{{route('verDivisiones')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="color: black; font-weight: bold">Inscripciones</p>
+                </a>
+              </li>
+              {{-- <li class="nav-item">
+                <a href="{{route('verAsigEspCur')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Asignaturas / Esp. Curriculares</p>
+                </a>
+              </li>  --}}
+              
+            </ul>
+          </li>
+          <li class="nav-item menu-is-opening menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p style="color: black; font-weight: bold">
+                Legajo U. de Personal
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right"><!--aqui algo--></span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+               <li class="nav-item">
+                <a href="{{route('nuevoAgente')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="color: black; font-weight: bold">Crear Agente Nuevo</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('verArbolServicio')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Conf. Agente</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('verArbolServicio2')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Agentes</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-is-opening menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Novedades
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right"><!--aqui algo--></span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('ver_novedades_altas')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Altas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('ver_novedades_bajas')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Bajas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('ver_novedades_licencias')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Licencias</p>
+                </a>
+              </li>
+              {{-- <li class="nav-item">
+                <a href="{{route('generar_pdf_novedades')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Generar PDF de Novedades</p>
+                </a>
+              </li> --}}
+              <li class="nav-item">
+                <a href="{{route('buscar_dni_cue')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Consulta Temporal - Borrar</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        @endif
+          <!--fin usuario docente superior-->
         @if (session('Modo')==2)
           <li class="nav-item menu-is-opening menu-open">
             <a href="#" class="nav-link">
@@ -169,7 +288,7 @@
           <li class="nav-item menu-is-opening menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
-              <p>
+              <p style="color: yellow;">
                 Legajo U. de Personal
                 <i class="fas fa-angle-left right"></i>
                 <span class="badge badge-info right"><!--aqui algo--></span>
@@ -324,11 +443,11 @@
             </ul>
           </li>          
         @endif 
-          <li class="nav-header">Opciones</li>
+          <li class="nav-header" style="color: black; font-weight: bold">Opciones</li>
           <li class="nav-item">
             <a href="{{route('Salir')}}" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
-              <p>
+              <i style="color: rgb(50, 205, 128);" class="nav-icon far fa-calendar-alt"></i>
+              <p style="color: black; font-weight: bold">
                 Salir
                 <span class="badge badge-info right"><!--aqui algo--></span>
               </p>
