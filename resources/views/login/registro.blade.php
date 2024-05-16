@@ -152,25 +152,7 @@
      </script>
 
         <script src="{{ asset('js/funcionesvarias.js') }}"></script>
-        @if (session('ConfirmarNuevoUsuario')=='OK')
-          <script>
-            Swal.fire(
-                'Excelente',
-                'Registro Creado Correctamente!!',
-                'success'
-                    )
-          </script>
-        @endif
-
-        @if (session('ConfirmarNuevoUsuarioError')=='OK')
-          <script>
-            Swal.fire(
-              'Registro Cancelado',
-              'Ya Existe Ese DNI!!. Por favor, Inicie sesión en la pantalla principal del sistema.',
-              'error'
-                  )
-          </script>
-        @endif
+      
    
 
  <script>
@@ -202,5 +184,31 @@
           })
       }
     })
+ </script>
+
+    @if (session('ConfirmarNuevoUsuario')=='OK')
+          <script>
+            Swal.fire({
+            title: 'Excelente',
+            text: 'Registro Creado Correctamente!!. Por favor, Inicie sesión en la pantalla principal del sistema',
+            icon: 'success'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/'; // Redirigir a la página de inicio de sesión
+            }
+        });
+                    
+          </script>
+        @endif
+
+        @if (session('ConfirmarNuevoUsuarioError')=='OK')
+          <script>
+            Swal.fire(
+              'Registro Cancelado',
+              'Ya Existe Un Registro Con Ese DNI!!.',
+              'error'
+                  )
+          </script>
+        @endif
   </script>
 @endsection

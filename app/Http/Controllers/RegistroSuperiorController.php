@@ -58,6 +58,7 @@ class RegistroSuperiorController extends Controller
             $a->save();
   
             return redirect('/registro')->with('ConfirmarNuevoUsuario', 'OK');
+            
         } else {
             return redirect('/registro')->with('ConfirmarNuevoUsuarioError', 'OK');
     

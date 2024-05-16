@@ -63,15 +63,15 @@
 {{-- <div class="loader"></div>  --}}
 
 <div class=""> <!-- Aquí era así <div class="wrapper"> -->
-
+  
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="{{ asset('dist/img/Spinner-3.gif') }}" alt="NIVEL SUPERIOR" height="60" width="60">
   </div>
 
-  <!--Hamburguesa-->
-  <nav class="main-header navbar navbar-expand navbar-light">
-    <ul class="navbar-nav align-items-center">
+  <!--bandeja principal-->
+  <nav class="main-header navbar navbar-expand navbar-light brand-text font-weight-bold" style="background-color: rgb(244, 244, 202)">
+    <ul class="navbar-nav align-items-center" >
       <li class="nav-item"> <a href="#" class="nav-link" data-widget="pushmenu" role="button"><i class="fas fa-bars"></i></a></li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link h5">
@@ -84,8 +84,12 @@
             }
             ?>
         </a>
+       
       </li>
     </ul>
+    <a style="justify-content: flex-end; padding-left: 80%;"  href="{{route('Salir')}}" class="nav-link">
+      <i style="color:rgb(5, 179, 83); " class="fa fa-power-off"> Cerrar</i>         
+    </a>
   </nav>
 
   <!-- Main Sidebar Container -->
@@ -93,7 +97,7 @@
     <!-- Brand Logo -->
     <a href="{{route('Bandeja')}}" class="brand-link">
       <img src="{{ asset('dist/img/logo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span style="color: black;" class="brand-text font-weight-bold">Panel Docente</span>
+      <span style="color: black;" class="brand-text font-weight-bold">{{session('NombreModo')}}</span>
     </a>
 
     <!-- Sidebar -->
@@ -111,27 +115,26 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+      
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th" style="color: rgb(50, 205, 128);"></i>
-              <span style="color: black; font-weight: bold">
-                Mi Perfil
-              </span>
+              <i class="nav-icon fas fa-home" style="color:  rgb(5, 179, 83);">
+                <span style="color: black; font-weight: bold">
+                  Inicio
+                </span>
+              </i>             
             </a>
           </li>
-
           <!--usuario docente superior-->
           @if (session('Modo')==7)
           <li class="nav-item menu-is-opening menu-open">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p style="color: black; font-weight: bold">
-                Legajo
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right"><!--aqui algo--></span>
-              </p>
+              <i class="nav-icon fas fa-copy" style="color: rgb(5, 179, 83);">
+                <span style="color: black; font-weight: bold">
+                  Mis Datos                   
+                </span>   
+              </i>        
+              <i class="fas fa-angle-left right"></i>     
             </a>
             <ul class="nav nav-treeview">
               {{-- <li class="nav-item">
@@ -142,8 +145,8 @@
               </li> --}}
               <li class="nav-item">
                 <a href="{{route('getOpcionesOrg')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p style="color: black; font-weight: bold">Documentación</p>
+                  <i class="nav-icon far fa-circle text-blue"></i>
+                  <p style="color: black; font-weight: bold">Datos Personales</p>
                 </a>
               </li>
               {{-- <li class="nav-item">
@@ -154,211 +157,294 @@
               </li>  --}}
               <li class="nav-item">
                 <a href="{{route('verDivisiones')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p style="color: black; font-weight: bold">Inscripciones</p>
+                  <i class="nav-icon far fa-circle text-warning"></i>
+                  <p style="color: black; font-weight: bold">Datos de Domicilio</p>
                 </a>
               </li>
-              {{-- <li class="nav-item">
+              <li class="nav-item">
                 <a href="{{route('verAsigEspCur')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Asignaturas / Esp. Curriculares</p>
+                  <i class="nav-icon far fa-circle text-info"></i>
+                  <p style="color: black; font-weight: bold">Datos de Contacto</p>
                 </a>
-              </li>  --}}
+              </li> 
               
             </ul>
           </li>
           <li class="nav-item menu-is-opening menu-open">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-copy" style="color:rgb(5, 179, 83);">
+                  <span style="color: black; font-weight: bold">
+                    Mi Zona                 
+                  </span>
+                </i>
+                <i class="fas fa-angle-left right"></i>            
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('ver_novedades_altas')}}" class="nav-link">
+                    <i class="nav-icon far fa-circle text-pink"></i>
+                    <p style="color: black; font-weight: bold">Cambio de Zona</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('ver_novedades_bajas')}}" class="nav-link">
+                    <i class="nav-icon far fa-circle text-success"> </i> 
+                      <p style="color: black; font-weight: bold">Documentos Zona</p>
+                                    
+                  </a>                 
+                </li>            
+              
+             </ul>
+           </li>
+          <li class="nav-item menu-is-opening menu-open">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p style="color: black; font-weight: bold">
-                Legajo U. de Personal
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right"><!--aqui algo--></span>
-              </p>
+              <i class="nav-icon fas fa-copy" style="color: rgb(5, 179, 83);">
+                <span style="color: black; font-weight: bold">
+                  Mi Documentación               
+                </span>
+              </i>              
+              <i class="fas fa-angle-left right"></i>
             </a>
             <ul class="nav nav-treeview">
                <li class="nav-item">
                 <a href="{{route('nuevoAgente')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p style="color: black; font-weight: bold">Crear Agente Nuevo</p>
+                  <i class="nav-icon far fa-circle text-pink"></i>
+                  <p style="color: black; font-weight: bold">Títulos</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('verArbolServicio')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Conf. Agente</p>
+                  <i class="nav-icon far fa-circle text-warning"></i>
+                  <p style="color: black; font-weight: bold">Certificados</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('verArbolServicio2')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lista de Agentes</p>
+                  <i class="nav-icon far fa-circle text-success"></i>
+                  <p style="color: black; font-weight: bold">F2</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('verArbolServicio2')}}" class="nav-link">
+                  <i class="nav-icon far fa-circle text-warning"></i>
+                  <p style="color: black; font-weight: bold">Certificación de Servicios</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('verArbolServicio2')}}" class="nav-link">
+                  <i class="nav-icon far fa-circle text-info"></i>
+                  <p style="color: black; font-weight: bold">Concepto</p>
+                </a>
+              </li>
+           
             </ul>
           </li>
           <li class="nav-item menu-is-opening menu-open">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Novedades
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right"><!--aqui algo--></span>
-              </p>
+              <i class="nav-icon fas fa-copy" style="color:rgb(5, 179, 83);">
+                <span style="color: black; font-weight: bold">
+                  Mis Inscripciones               
+                </span>
+              </i>             
+              <i class="fas fa-angle-left right" style="color: rgb(50, 205, 128);"></i>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('ver_novedades_altas')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Altas</p>
+                  <i class="nav-icon far fa-circle text-red"></i>
+                  <p style="color: black; font-weight: bold">Altas</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('ver_novedades_bajas')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Bajas</p>
+                  <i class="nav-icon far fa-circle text-blue"></i>
+                  <p style="color: black; font-weight: bold">Bajas</p>
                 </a>
               </li>
+             {{-- <i class="far fa-circle nav-icon"></i>
               <li class="nav-item">
                 <a href="{{route('ver_novedades_licencias')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Licencias</p>
+                <p>Licencias</p>
                 </a>
-              </li>
+              </li> --}}
               {{-- <li class="nav-item">
                 <a href="{{route('generar_pdf_novedades')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Generar PDF de Novedades</p>
                 </a>
               </li> --}}
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="{{route('buscar_dni_cue')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Consulta Temporal - Borrar</p>
-                </a>
+                </a> --}}
               </li>
             </ul>
           </li>
         @endif
           <!--fin usuario docente superior-->
-        @if (session('Modo')==2)
-          <li class="nav-item menu-is-opening menu-open">
+        
+          <!--inicio usuario Administrador superior-->
+
+        @if (session('Modo')==8)
+        <li class="nav-item menu-is-opening menu-open">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-copy" style="color: rgb(5, 179, 83);">
+              <span style="color: black; font-weight: bold">
+                Mis Datos                   
+              </span>   
+            </i>        
+            <i class="fas fa-angle-left right"></i>     
+          </a>
+          <ul class="nav nav-treeview">
+            {{-- <li class="nav-item">
+              <a href="{{route('verSubOrg')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Instituci&oacuten</p>
+              </a>
+            </li> --}}
+            <li class="nav-item">
+              <a href="{{route('getOpcionesOrg')}}" class="nav-link">
+                <i class="nav-icon far fa-circle text-blue"></i>
+                <p style="color: black; font-weight: bold">Datos Personales</p>
+              </a>
+            </li>
+            {{-- <li class="nav-item">
+              <a href="{{route('getCarrerasPlanes')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Carreras y Modalidades</p>
+              </a>
+            </li>  --}}
+            <li class="nav-item">
+              <a href="{{route('verDivisiones')}}" class="nav-link">
+                <i class="nav-icon far fa-circle text-warning"></i>
+                <p style="color: black; font-weight: bold">Datos de Domicilio</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('verAsigEspCur')}}" class="nav-link">
+                <i class="nav-icon far fa-circle text-info"></i>
+                <p style="color: black; font-weight: bold">Datos de Contacto</p>
+              </a>
+            </li> 
+            
+          </ul>
+        </li>
+        <li class="nav-item menu-is-opening menu-open">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Legajo U. Institucional
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right"><!--aqui algo--></span>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              {{-- <li class="nav-item">
-                <a href="{{route('verSubOrg')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Instituci&oacuten</p>
-                </a>
-              </li> --}}
-              <li class="nav-item">
-                <a href="{{route('getOpcionesOrg')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Datos Institucionales</p>
-                </a>
-              </li>
-              {{-- <li class="nav-item">
-                <a href="{{route('getCarrerasPlanes')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Carreras y Modalidades</p>
-                </a>
-              </li>  --}}
-              <li class="nav-item">
-                <a href="{{route('verDivisiones')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Cursos y Divisiones</p>
-                </a>
-              </li>
-              {{-- <li class="nav-item">
-                <a href="{{route('verAsigEspCur')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Asignaturas / Esp. Curriculares</p>
-                </a>
-              </li>  --}}
-              
-            </ul>
-          </li>
-          <li class="nav-item menu-is-opening menu-open">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p style="color: yellow;">
-                Legajo U. de Personal
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right"><!--aqui algo--></span>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-               <li class="nav-item">
-                <a href="{{route('nuevoAgente')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Crear Agente Nuevo</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('verArbolServicio')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Conf. Agente</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('verArbolServicio2')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lista de Agentes</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item menu-is-opening menu-open">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Novedades
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right"><!--aqui algo--></span>
-              </p>
+              <i class="nav-icon fas fa-copy" style="color:rgb(5, 179, 83);">
+                <span style="color: black; font-weight: bold">
+                 Docentes              
+                </span>
+              </i>
+              <i class="fas fa-angle-left right"></i>            
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('ver_novedades_altas')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Altas</p>
+                  <i class="nav-icon far fa-circle text-pink"></i>
+                  <p style="color: black; font-weight: bold">Con Legajo</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('ver_novedades_bajas')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Bajas</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('ver_novedades_licencias')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Licencias</p>
-                </a>
-              </li>
-              {{-- <li class="nav-item">
-                <a href="{{route('generar_pdf_novedades')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Generar PDF de Novedades</p>
-                </a>
-              </li> --}}
-              <li class="nav-item">
-                <a href="{{route('buscar_dni_cue')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Consulta Temporal - Borrar</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+                  <i class="nav-icon far fa-circle text-success"> </i> 
+                    <p style="color: black; font-weight: bold">Sin Legajo</p>
+                                  
+                </a>                 
+              </li>            
+            
+           </ul>
+         </li>
+        <li class="nav-item menu-is-opening menu-open">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-copy" style="color: rgb(5, 179, 83);">
+              <span style="color: black; font-weight: bold">
+               clasificación              
+              </span>
+            </i>              
+            <i class="fas fa-angle-left right"></i>
+          </a>
+          <ul class="nav nav-treeview">
+             <li class="nav-item">
+              <a href="{{route('nuevoAgente')}}" class="nav-link">
+                <i class="nav-icon far fa-circle text-pink"></i>
+                <p style="color: black; font-weight: bold">Títulos</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('verArbolServicio')}}" class="nav-link">
+                <i class="nav-icon far fa-circle text-warning"></i>
+                <p style="color: black; font-weight: bold">Certificados</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('verArbolServicio2')}}" class="nav-link">
+                <i class="nav-icon far fa-circle text-success"></i>
+                <p style="color: black; font-weight: bold">F2</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('verArbolServicio2')}}" class="nav-link">
+                <i class="nav-icon far fa-circle text-warning"></i>
+                <p style="color: black; font-weight: bold">Certificación de Servicios</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('verArbolServicio2')}}" class="nav-link">
+                <i class="nav-icon far fa-circle text-info"></i>
+                <p style="color: black; font-weight: bold">Concepto</p>
+              </a>
+            </li>
+         
+          </ul>
+        </li>
+        <li class="nav-item menu-is-opening menu-open">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-copy" style="color:rgb(5, 179, 83);">
+              <span style="color: black; font-weight: bold">
+                Llamados              
+              </span>
+            </i>             
+            <i class="fas fa-angle-left right" style="color: rgb(50, 205, 128);"></i>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{route('ver_novedades_altas')}}" class="nav-link">
+                <i class="nav-icon far fa-circle text-red"></i>
+                <p style="color: black; font-weight: bold">Altas</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('ver_novedades_bajas')}}" class="nav-link">
+                <i class="nav-icon far fa-circle text-blue"></i>
+                <p style="color: black; font-weight: bold">Bajas</p>
+              </a>
+            </li>
+           {{-- <i class="far fa-circle nav-icon"></i>
+            <li class="nav-item">
+              <a href="{{route('ver_novedades_licencias')}}" class="nav-link">
+              <p>Licencias</p>
+              </a>
+            </li> --}}
+            {{-- <li class="nav-item">
+              <a href="{{route('generar_pdf_novedades')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Generar PDF de Novedades</p>
+              </a>
+            </li> --}}
+            {{-- <li class="nav-item">
+              <a href="{{route('buscar_dni_cue')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Consulta Temporal - Borrar</p>
+              </a> --}}
+            </li>
+          </ul>
+        </li>
         @endif
-      
+        
+       {{-- fin admin superior--}}
+
         @if (session('Modo')==1)
         {{-- admin --}}
         
@@ -446,7 +532,7 @@
           <li class="nav-header" style="color: black; font-weight: bold">Opciones</li>
           <li class="nav-item">
             <a href="{{route('Salir')}}" class="nav-link">
-              <i style="color: rgb(50, 205, 128);" class="nav-icon far fa-calendar-alt"></i>
+              <i style="color:rgb(5, 179, 83);" class="fa fa-power-off"></i>
               <p style="color: black; font-weight: bold">
                 Salir
                 <span class="badge badge-info right"><!--aqui algo--></span>
@@ -466,6 +552,7 @@
   <!-- Content Wrapper. Contains page content -->
     <!-- Main content -->
     <section class="content">
+      
       <div class="container-fluid">
         @yield('ContenidoPrincipal')    
         
