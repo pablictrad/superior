@@ -74,20 +74,20 @@
     <ul class="navbar-nav align-items-center" >
       <li class="nav-item"> <a href="#" class="nav-link" data-widget="pushmenu" role="button"><i class="fas fa-bars"></i></a></li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link h5">
+        <a href="#" class="nav-link h6">
           <?php
             if(isset($mensajeNAV))
             {
               echo $mensajeNAV;
             }else{
-              echo "No Autenticado";
+            
             }
             ?>
         </a>
        
       </li>
     </ul>
-    <a style="justify-content: flex-end; padding-left: 80%;"  href="{{route('Salir')}}" class="nav-link">
+    <a style="justify-content: flex-end; padding-left: 70%;"  href="{{route('Salir')}}" class="nav-link">
       <i style="color:rgb(5, 179, 83); " class="fa fa-power-off"> Cerrar</i>         
     </a>
   </nav>
@@ -95,7 +95,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar elevation-4" style="background-color: rgb(244, 244, 202)">
     <!-- Brand Logo -->
-    <a href="{{route('Bandeja')}}" class="brand-link">
+    <a href="#" class="brand-link">
       <img src="{{ asset('dist/img/logo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span style="color: black;" class="brand-text font-weight-bold">{{session('NombreModo')}}</span>
     </a>
@@ -117,7 +117,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
       
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('Bandeja')}}" class="nav-link">
               <i class="nav-icon fas fa-home" style="color:  rgb(5, 179, 83);">
                 <span style="color: black; font-weight: bold">
                   Inicio
@@ -128,66 +128,47 @@
           <!--usuario docente superior-->
           @if (session('Modo')==7)
           <li class="nav-item menu-is-opening menu-open">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy" style="color: rgb(5, 179, 83);">
-                <span style="color: black; font-weight: bold">
-                  Mis Datos                   
-                </span>   
-              </i>        
-              <i class="fas fa-angle-left right"></i>     
+            @php
+              $ag=DB::table('tb_usuarios')
+              ->join('tb_agentes','tb_agentes.Documento','=','tb_usuarios.Agente')
+              ->where('idUsuario',session('idUsuario'))
+              ->first();
+              
+            @endphp
+           <a href="#" class="nav-link">
+               <i class="nav-icon fas fa-copy" style="color: rgb(5, 179, 83);">
+                  <span style="color: black; font-weight: bold">
+                    Mis Datos                   
+                  </span>   
+               </i>                     
             </a>
-            <ul class="nav nav-treeview">
-              {{-- <li class="nav-item">
-                <a href="{{route('verSubOrg')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Instituci&oacuten</p>
-                </a>
-              </li> --}}
+            <ul class="nav nav-treeview">       
               <li class="nav-item">
-                <a href="{{route('getOpcionesOrg')}}" class="nav-link">
-                  <i class="nav-icon far fa-circle text-blue"></i>
+                <a href="{{route('editarAgente',$ag->idAgente)}}" class="nav-link">
+                  <i class="nav-icon far fa-circle text-pink"></i>
                   <p style="color: black; font-weight: bold">Datos Personales</p>
                 </a>
               </li>
-              {{-- <li class="nav-item">
-                <a href="{{route('getCarrerasPlanes')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Carreras y Modalidades</p>
-                </a>
-              </li>  --}}
-              <li class="nav-item">
-                <a href="{{route('verDivisiones')}}" class="nav-link">
-                  <i class="nav-icon far fa-circle text-warning"></i>
-                  <p style="color: black; font-weight: bold">Datos de Domicilio</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('verAsigEspCur')}}" class="nav-link">
-                  <i class="nav-icon far fa-circle text-info"></i>
-                  <p style="color: black; font-weight: bold">Datos de Contacto</p>
-                </a>
-              </li> 
-              
             </ul>
           </li>
           <li class="nav-item menu-is-opening menu-open">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-copy" style="color:rgb(5, 179, 83);">
                   <span style="color: black; font-weight: bold">
-                    Mi Zona                 
+                    Zona                 
                   </span>
                 </i>
                 <i class="fas fa-angle-left right"></i>            
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{route('ver_novedades_altas')}}" class="nav-link">
+                  <a href="{{route('editarZona',$ag->idAgente)}}" class="nav-link">
                     <i class="nav-icon far fa-circle text-pink"></i>
-                    <p style="color: black; font-weight: bold">Cambio de Zona</p>
+                    <p style="color: black; font-weight: bold">Solicitar Cambio de Zona</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{route('ver_novedades_bajas')}}" class="nav-link">
+                  <a href="{{route('editarAgente',$ag->idAgente)}}" class="nav-link">
                     <i class="nav-icon far fa-circle text-success"> </i> 
                       <p style="color: black; font-weight: bold">Documentos Zona</p>
                                     
@@ -207,31 +188,31 @@
             </a>
             <ul class="nav nav-treeview">
                <li class="nav-item">
-                <a href="{{route('nuevoAgente')}}" class="nav-link">
+                <a href="{{route('editarAgente',$ag->idAgente)}}" class="nav-link">
                   <i class="nav-icon far fa-circle text-pink"></i>
                   <p style="color: black; font-weight: bold">Títulos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('verArbolServicio')}}" class="nav-link">
+                <a href="{{route('editarAgente',$ag->idAgente)}}" class="nav-link">
                   <i class="nav-icon far fa-circle text-warning"></i>
                   <p style="color: black; font-weight: bold">Certificados</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('verArbolServicio2')}}" class="nav-link">
+                <a href="{{route('editarAgente',$ag->idAgente)}}" class="nav-link">
                   <i class="nav-icon far fa-circle text-success"></i>
                   <p style="color: black; font-weight: bold">F2</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('verArbolServicio2')}}" class="nav-link">
+                <a href="{{route('editarAgente',$ag->idAgente)}}" class="nav-link">
                   <i class="nav-icon far fa-circle text-warning"></i>
                   <p style="color: black; font-weight: bold">Certificación de Servicios</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('verArbolServicio2')}}" class="nav-link">
+                <a href="{{route('editarAgente',$ag->idAgente)}}" class="nav-link">
                   <i class="nav-icon far fa-circle text-info"></i>
                   <p style="color: black; font-weight: bold">Concepto</p>
                 </a>
@@ -250,13 +231,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('ver_novedades_altas')}}" class="nav-link">
+                <a href="{{route('editarAgente',$ag->idAgente)}}" class="nav-link">
                   <i class="nav-icon far fa-circle text-red"></i>
                   <p style="color: black; font-weight: bold">Altas</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('ver_novedades_bajas')}}" class="nav-link">
+                <a href="{{route('editarAgente',$ag->idAgente)}}" class="nav-link">
                   <i class="nav-icon far fa-circle text-blue"></i>
                   <p style="color: black; font-weight: bold">Bajas</p>
                 </a>
@@ -304,29 +285,12 @@
               </a>
             </li> --}}
             <li class="nav-item">
-              <a href="{{route('getOpcionesOrg')}}" class="nav-link">
+              <a href="{{route('editarAgente',$ag->idAgente)}}" class="nav-link">
                 <i class="nav-icon far fa-circle text-blue"></i>
                 <p style="color: black; font-weight: bold">Datos Personales</p>
               </a>
             </li>
-            {{-- <li class="nav-item">
-              <a href="{{route('getCarrerasPlanes')}}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Carreras y Modalidades</p>
-              </a>
-            </li>  --}}
-            <li class="nav-item">
-              <a href="{{route('verDivisiones')}}" class="nav-link">
-                <i class="nav-icon far fa-circle text-warning"></i>
-                <p style="color: black; font-weight: bold">Datos de Domicilio</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{route('verAsigEspCur')}}" class="nav-link">
-                <i class="nav-icon far fa-circle text-info"></i>
-                <p style="color: black; font-weight: bold">Datos de Contacto</p>
-              </a>
-            </li> 
+           
             
           </ul>
         </li>

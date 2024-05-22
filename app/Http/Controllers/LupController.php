@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AgenteModel;
+use App\Models\AgenteRespaldoModel;
 use Illuminate\Http\Request;
 use App\Models\OrganizacionesModel;
 use Illuminate\Support\Facades\DB;
@@ -850,6 +851,164 @@ class LupController extends Controller
     return response()->json(['success' => true, 'message' => $nuevaCantidad]);
 
    }
+   public function editarAgente($idAgente){
+           //extras a enviar
+           $TiposDeDocumentos = DB::table('tb_tiposdedocumento')->get();
+           $TiposDeAgentes = DB::table('tb_tiposdeagente')->get();
+           $Sexos = DB::table('tb_sexo')->get();
+           $EstadosCiviles = DB::table('tb_estadosciviles')->get();
+           $Nacionalidades = DB::table('tb_nacionalidad')->get();
+           $TurnosUsuario = DB::table('tb_turnos_usuario')->get();
+   
+           $Localidades = DB::table('tb_localidades') ->orderBy('tb_localidades.localidad','ASC')->get();
+           $Departamentos = DB::table('tb_departamentos') ->orderBy('tb_departamentos.nombre_dpto','ASC')->get();
+           $Provincias = DB::table('tb_provincias')->get();
+   
+           $Agente = DB::table('tb_agentes')
+           ->where('tb_agentes.idAgente',$idAgente) //es and
+           ->first();
+
+           $usu = DB::table('tb_usuarios')
+           ->where('tb_usuarios.idUsuario',session('idUsuario')) //es and
+           ->first();
+           //dd($RelSubOrgAgente);
+           $datos=array(
+               'mensajeError'=>"",
+               'mensajeNAV'=>'Panel de Usuarios',
+               'Agente'=>$Agente,
+               'usuario'=>$usu,
+               'Sexos'=>$Sexos,
+               'Localidades'=>$Localidades,
+               'Departamentos'=>$Departamentos,
+               'Provincias'=>$Provincias
+               
+           );
+           //dd($infoPlaza);
+           return view('bandeja.LUP.editar_agente',$datos);
+       }
+       public function FormActualizarAgente_ind(Request $request){
+        //dd($request);
+        /*
+                "_token" => "oeE2YYcg3uCw5a1RQHlHswWe8xrI10edNeZwTWmH"
+            "Agente" => "LOYOLA, LEO"
+            "DNI" => "26731952"                 
+            "CUIL" => "23267319529"
+            "Sexo" => "M"
+            "Barrio" => "Parque Sud"
+            "Calle" => "Las Heras"
+            "NumCasa" => "1586"
+            --piso y numero_piso
+            "Provincia" => "100"
+            "Departamento" => "1"
+            "Localidad" => "38"
+            "ag" => "10122"
+        */
+        //una vez modificado los datos bases del agente
+        
+        $Agente = AgenteRespaldoModel::where('idAgente',$request->ag)->first();
+            $Agente->ApeNom = $request->Agente;
+            //$Agente->Documento = $request->DNI;                       //por ahora no lo dejare modificar
+            $Agente->Cuil = $request->CUIL; 
+            $Agente->Sexo = $request->Sexo;
+            $Agente->Barrio = $request->Barrio;
+            $Agente->Calle = $request->Calle;
+            $Agente->Numero_Casa = $request->NumCasa;
+            $Agente->Piso = $request->Piso;
+            $Agente->Numero_Dpto = $request->numero_piso;
+            $Agente->Localidad = $request->Localidad;
+            $Agente->telefono = $request->NumTel;
+        $Agente->save();
+
+        //debo modificar en su copia que es el desglose
+        $agecop = AgenteModel::where('docu',$request->DNI)->get();
+
+            if($agecop){
+                foreach($agecop as $ag){
+                    //$ag = AgenteModel::where('idDesgloseAgente',$agecop->idDesgloseAgente)->first();
+                        $ag->nomb = $request->Agente;            //por ahora no lo dejare modificar
+                        $ag->cuil = $request->CUIL; 
+                    $ag->save();
+                }
+            }
+
+            $idAg = $request->ag;
+            return redirect("/editarAgente/$idAg")->with('ConfirmarActualizarAgente','OK');
+        
+    }
+    public function traerLocalidades($idDepto){
+        //traigo las relaciones Suborg->planes->carrera
+        $Localidades = DB::table('tb_localidades')
+        ->where('tb_localidades.Departamento',$idDepto)
+        ->orderBy('tb_localidades.localidad','ASC')
+        ->get();
+
+        return response()->json(array('status' => 200, 'msg' => $Localidades), 200);
+    }
+    //traigo datos para cambiar zona
+    public function editarZona($idAgente){
+        //extras a enviar
+        $TiposDeDocumentos = DB::table('tb_tiposdedocumento')->get();
+        $TiposDeAgentes = DB::table('tb_tiposdeagente')->get();
+        $Sexos = DB::table('tb_sexo')->get();
+        $EstadosCiviles = DB::table('tb_estadosciviles')->get();
+        $Nacionalidades = DB::table('tb_nacionalidad')->get();
+        $TurnosUsuario = DB::table('tb_turnos_usuario')->get();
+
+        $Localidades = DB::table('tb_localidades') ->orderBy('tb_localidades.localidad','ASC')->get();
+        $Departamentos = DB::table('tb_departamentos') ->orderBy('tb_departamentos.nombre_dpto','ASC')->get();
+        $Provincias = DB::table('tb_provincias')->get();
+
+        $Agente = DB::table('tb_agentes')
+        ->where('tb_agentes.idAgente',$idAgente) //es and
+        ->first();
+
+        $usu = DB::table('tb_usuarios')
+        ->where('tb_usuarios.idUsuario',session('idUsuario')) //es and
+        ->first();
+        //dd($RelSubOrgAgente);
+        $datos=array(
+            'mensajeError'=>"",
+            'mensajeNAV'=>'Panel de Usuarios',
+            'Agente'=>$Agente,
+            'usuario'=>$usu,
+            'Sexos'=>$Sexos,
+            'Localidades'=>$Localidades,
+            'Departamentos'=>$Departamentos,
+            'Provincias'=>$Provincias
+            
+        );
+        //dd($infoPlaza);
+        return view('bandeja.LUP.cambio_zona',$datos);
+    }
+      //solicitar actualizar datos
+    public function FormActualizarZona_ind(Request $request){
+     $Agente = AgenteRespaldoModel::where('idAgente',$request->ag)->first();
+              
+         $Agente->cambio_Barrio = $request->Barrio;
+         $Agente->cambio_Calle = $request->Calle;
+         $Agente->cambio_Numero_Casa = $request->NumCasa;
+         $Agente->cambio_Piso = $request->Piso;
+         $Agente->cambio_Numero_Dpto = $request->numero_piso;
+         $Agente->cambio_Localidad = $request->Localidad;
+         
+     $Agente->save();
+
+     //debo modificar en su copia que es el desglose
+     $agecop = AgenteModel::where('docu',$request->DNI)->get();
+
+         if($agecop){
+             foreach($agecop as $ag){
+                 //$ag = AgenteModel::where('idDesgloseAgente',$agecop->idDesgloseAgente)->first();
+                     $ag->nomb = $request->Agente;            //por ahora no lo dejare modificar
+                     $ag->cuil = $request->CUIL; 
+                 $ag->save();
+             }
+         }
+
+         $idAg = $request->ag;
+         return redirect("/editarZona/$idAg")->with('ConfirmarActualizarAgente','OK');
+     
+ }
 
 
 

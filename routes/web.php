@@ -37,7 +37,12 @@ Route::post('/servicio/guardar',[ServicioGeneralController::class,'guardar'])->n
 
 Route::get('/registro',[RegistroSuperiorController::class,'mostrarFormulario'])->name('registro');
 Route::post('/crearregistro',[RegistroSuperiorController::class,'guardarDatos'])->name('crearregistro');
-//cambios nuevos
+Route::get('/editarAgente/{idAgente}',[LupController::class,'editarAgente'])->name('editarAgente');
+Route::post('/FormActualizarAgente_ind',[LupController::class,'FormActualizarAgente_ind'])->name('FormActualizarAgente_ind');
+Route::get('/traerLocalidades/{idDepto}',[LupController::class,'traerLocalidades'])->name('traerLocalidades');//cambios nuevos
+//solicitar cambio de zona
+Route::get('editarZona/{idAgente}',[LupController::class,'editarZona'])->name('editarZona');
+Route::post('/FormActualizarZona_ind',[LupController::class,'FormActualizarZona_ind'])->name('FormActualizarZona_ind');
 
 //controla las rutas de errores
 Route::fallback([Controller::class, 'show404']);

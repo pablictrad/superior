@@ -21,10 +21,10 @@
       
           <div class="row">        
               <div class="col-md-12">                 
-                  <div class="row" style="padding-top: 20px; padding-left: 100px; margin-left: 100px;">
-                      <div class="card-body small-box bg-warning col-md-3" style="padding-top: 20px; padding-left: 50px; margin-left: 50px;">
+                  <div class="row" style="padding-top: 20px; padding-left: 40px; margin-left: 40px;">
+                      <div class="card-body small-box bg-warning col-md-3" style="padding-top: 20px; padding-left: 40px; margin-left: 40px;">
                           <div class="inner">
-                              <h4 style="font-weight: bold; color:blue;">Llamado: Perfil<sup ></sup></h4>    
+                              <h5 style="font-weight: bold; color:blue;">Llamado: Perfil<sup ></sup></h5>    
                               <p style="text-align: center; font-weight: bold">Zona - Dpto</br>
                               Instituto</br>
                               Carrera</p>
@@ -34,8 +34,8 @@
                               <p style="font-weight: bold; color:black;">Fecha:</p>
                           </div>
                       </div>                    
-                      <div class="card-body small-box bg-pink col-3" style="padding-top: 20px; padding-left: 50px; margin-left: 50px;">
-                            <h4 style="font-weight: bold; color:white;">Llamado: Perfil<sup ></sup></h4>    
+                      <div class="card-body small-box bg-pink col-3" style="padding-top: 20px; padding-left: 40px; margin-left: 40px;">
+                            <h5 style="font-weight: bold; color:white;">Llamado: Perfil<sup ></sup></h5>    
                             <p style="text-align: center; font-weight: bold">Zona - Dpto</br>
                             Instituto</br>
                             Carrera</p>
@@ -44,8 +44,8 @@
                               <p style="font-weight: bold; color:white;">Fecha:</p>
                           </div>                   
                       </div>
-                      <div class="card-body small-box bg-success col-3" style="padding-top: 20px; padding-left: 50px; margin-left: 50px;">
-                            <h4 style="font-weight: bold; color:white;">Llamado: Perfil<sup ></sup></h4>    
+                      <div class="card-body small-box bg-success col-3" style="padding-top: 20px; padding-left: 40px; margin-left: 40px;">
+                            <h5 style="font-weight: bold; color:white;">Llamado: Perfil<sup ></sup></h5>    
                             <p style="text-align: center; font-weight: bold">Zona - Dpto</br>
                             Instituto</br>
                             Carrera</p>
@@ -60,10 +60,10 @@
           </div>    
               <div class="row">        
                   <div class="col-md-12">    
-                      <div class="row" style="padding-top: 20px; padding-left: 100px; margin-left: 100px;">
-                         <div class="card-body small-box bg-dark col-3" style="padding-top: 20px; padding-left: 50px; margin-left: 50px;">
-                                <h4 style="font-weight: bold; color:white;">Llamado: Perfil<sup ></sup></h4>    
-                                <p style="text-align: center; font-weight: bold">Zona - Dpto</br>
+                      <div class="row" style="padding-top: 20px; padding-left: 40px; margin-left: 40px;">
+                         <div class="card-body small-box bg-dark col-3" style="padding-top: 20px; padding-left: 40px; margin-left: 40px;">
+                                <h5 style="font-weight: bold; color:white;">Llamado: Perfil<sup ></sup></h5>    
+                                <p style="text-align: center; font-weight: bold; justify-content: center;">Zona - Dpto</br>
                                 Instituto</br>
                                 Carrera</p>
                               <div class="icon">
@@ -72,8 +72,8 @@
                               </div>                   
                           </div>
                       
-                          <div class="card-body small-box bg-warning col-3" style="padding-top: 20px; padding-left: 50px; margin-left: 50px;">
-                                <h4 style="font-weight: bold; color:white;">Llamado: Perfil<sup ></sup></h4>    
+                          <div class="card-body small-box bg-warning col-3" style="padding-top: 20px; padding-left: 40px; margin-left: 40px;">
+                                <h5 style="font-weight: bold; color:white;">Llamado: Perfil<sup ></sup></h5>    
                                 <p style="text-align: center; font-weight: bold">Zona - Dpto</br>
                                 Instituto</br>
                                 Carrera</p>
@@ -83,8 +83,8 @@
                               </div>                   
                           </div>
       
-                          <div class="card-body small-box bg-info col-3" style="padding-top: 20px; padding-left: 50px; margin-left: 50px;">
-                                <h4 style="font-weight: bold; color:white;">Llamado: Perfil<sup ></sup></h4>    
+                          <div class="card-body small-box bg-info col-3" style="padding-top: 20px; padding-left: 40px; margin-left: 40px;">
+                                <h5 style="font-weight: bold; color:white;">Llamado: Perfil<sup ></sup></h5>    
                                 <p style="text-align: center; font-weight: bold">Zona - Dpto</br>
                                 Instituto</br>
                                 Carrera</p>
