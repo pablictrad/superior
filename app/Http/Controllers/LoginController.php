@@ -88,7 +88,7 @@ class LoginController extends Controller
                     'mensajeError'=>"Usuario Correcto",
                     'mensajeNAV'=>'Bandeja Principal'
                     );
-                
+                //dd($datos);
                 return view('bandeja.index',$datos);
             }
             else{

@@ -505,5 +505,36 @@ $("#BtnPruebaAgregar").click(function() {
             }
         });
     }
-    
+// validar DNI en Registro 
+$(document).ready(function() {
+    $('#dni').on('input', function() { // Detecta cuando el usuario sale del campo DNI
+        var dni = $(this).val(); // Obtiene el valor del campo DNI
+        if(dni.length >6){      
+        $.ajax({
+            type: 'POST', // Método HTTP utilizado
+            url: '/buscar_agente', // URL del script PHP que manejará la búsqueda en la base de datos
+            data: { dni: dni }, // Datos que se enviarán al servidor (en este caso, el DNI)
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr("content")
+            },
+            success: function(response) {
+                if(response.msg==dni) {
+                    document.getElementById('alerta_dni').innerHTML="El DNI YA EXISTE";
+                    document.getElementById('btn-enviar').style.display="none";
+
+                }else{
+                    document.getElementById('alerta_dni').innerHTML="";
+                    document.getElementById('btn-enviar').style.display="block";
+
+                }             
+                //$('#alerta_dni').val(response.msg); // Actualiza el campo "Apellido y Nombre" con la respuesta del servidor
+               
+            }
+        });
+    }else {
+        document.getElementById('btn-enviar').style.display="none";
+
+    }
+    });
+});
 

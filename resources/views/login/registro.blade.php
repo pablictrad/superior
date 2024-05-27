@@ -1,7 +1,4 @@
 @extends('layout.app')
-
-
-
 @section('ContenidoPrincipal')
 <body class="lock-screen" onload="startTime()">
 
@@ -60,8 +57,9 @@
                                       <div class="form-group row">
                                         <div class="col-4">
                                           <label for="dni">DNI (Sin Puntos): </label>
-                                          <input type="text" autocomplete="off" class="form-control" id="dni" name="Documento" placeholder="Ingrese su Número de Documento"  value="">
-                                      </div>
+                                          <input type="text" autocomplete="off" class="form-control" id="dni" name="Documento" placeholder="Ingrese su Número de Documento"  value="" maxlength="8">
+                                          <span style="color: red;" id="alerta_dni">Buscando DNI...</span>
+                                        </div>
                                           <div class="col-4">
                                               <label for="Nombre">Nombre Completo: </label>
                                               <input type="text" autocomplete="off" class="form-control" id="Nombre" name="nombre" placeholder="Ingrese su nombre"  value="">
@@ -95,7 +93,7 @@
                                           </div>
                                   </div>
                                   <div class="form-group">
-                                    <button class="btn btn-block btn-success btn-lg" type="submit">
+                                    <button class="btn btn-block btn-success btn-lg" type="submit" id="btn-enviar" style="display: none;">
                                         <i class="fa fa-arrow-right">ENVIAR</i>
                                     </button>
                                   </div>

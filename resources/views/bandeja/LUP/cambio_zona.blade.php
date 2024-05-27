@@ -1,26 +1,40 @@
 @extends('layout.app')
 
-@section('Titulo', 'Sage2.0 - Editar Usuario ADMIN')
+@section('Titulo', 'ProfRegLR- Editar Usuario ADMIN')
 
 @section('ContenidoPrincipal')
 
 <section id="container">
     <section id="main-content">
         <section class="content-wrapper">
+            
                 <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <!-- Buscador Agente -->
-                    <h4 class="text-center display-4">Solicitar Cambio de Zona</h4>
-                    <!-- Agregar Nuevo Agente -->
+                    
                     <div class="row d-flex justify-content-center">
+                        <div class="row" style="font-weight: bold; text-align: justify; font-family: 'Times New Roman', Times, serif; width: 100%; align-content: center; align-items: center;">
+                            <div class="alert alert-success alert-dismissible " style="padding: 2%; padding-bottom: 0%; width: 100%;">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                              <h5 style="font-weight: bold; color:blue;"><i class="icon fas fa-info" style="font-weight: bold; color:blue; "></i>Información Importante!    LOS REQUISITOS PARA EL CAMBIO DE ZONA ESTÁN REGULADOS POR LA LEY N° 6436/01 Y DECRETO N°376/01:</h5>
+                             <br/>
+                              LA DOCUMENTACIÓN A PRESENTAR PARA SOLICITAR EL CAMBIO DE ZONA ES LA SIGUIENTE:<br/>
+                                <ol>
+                                   <li>La fotocopia de DNI (Debe estar certificada en el Registro Civil).</li>                                  
+                                   <li>Factura de Servicios.</li>
+                                  
+                              </ol>
+                              <p style="padding-top: -4%; font-family: 'Arial Narrow Bold', sans-serif;">El archivo a cargar debe ser extensión pdf y No debe ser mayor de 2 MB.
+                              </p>
+                            </div>       
+                        </div>
                         <!-- left column -->
                         <div class="col-md-10">
                             <!-- general form elements -->
                             <div class="card card-green">
                                 <div class="card-header">
                                     <h3 class="card-title">
-                                        Editar
+                                        Solicitar Cambio de Zona
                                     </h3>
                                 </div>
                                 <!-- /.card-header -->
@@ -33,9 +47,17 @@
                                     ->select('tb_departamentos.idDepartamento as Departamento','tb_localidades.idLocalidad as Localidad')
                                     ->first();
                                    // dd($infoDpto);
+                                   $d=$infoDpto->Departamento;
+                                   $l=$infoDpto->Localidad;
+
+                                   $Agente->cambio_idDpto;
+                                   if($Agente->cambio_idDpto != null){
+                                    $d=$Agente->cambio_idDpto;
+                                    $l=$Agente->cambio_Localidad;
+                                   }
                                     if($infoDpto){
-                                        echo '<input type="hidden" name="dpto" id="dpto" value="'.$infoDpto->Departamento.'">';
-                                        echo '<input type="hidden" name="idloc" id="idloc" value="'.$infoDpto->Localidad.'">';
+                                        echo '<input type="hidden" name="dpto" id="dpto" value="'.$d.'">';
+                                        echo '<input type="hidden" name="idloc" id="idloc" value="'.$l.'">';
                                     }else{
                                         echo '<input type="hidden" name="dpto" id="dpto" value="">';
                                         echo '<input type="hidden" name="idloc" id="idloc" value="">';
@@ -112,8 +134,15 @@
                                                 <select class="form-control" name="Departamento" id="Departamento">
                                                    
                                                         @if($infoDpto)
+                                                            @php
+                                                                if($d!=null){
+                                                                    $cambio = $d;
+                                                                }else{
+                                                                    $cambio =$infoDpto->Departamento;
+                                                                }
+                                                            @endphp
                                                             @foreach ($Departamentos as $dep)
-                                                                @if($infoDpto->Departamento == $dep->idDepartamento)
+                                                                @if($cambio == $dep->idDepartamento)
                                                                     <option value="{{$dep->idDepartamento}}" selected="selected">{{$dep->nombre_dpto}} ({{$dep->zona}})</option>
                                                                 @else
                                                                     <option value="{{$dep->idDepartamento}}">{{$dep->nombre_dpto}} ({{$dep->zona}})</option>
@@ -147,8 +176,42 @@
                                                    
                                                 </select>
                                             </div>
-                                            
+                                               
                                         </div>
+                                        <div class="row">
+                                            {{-- dni --}}
+                                            <div class="col-md-6">
+                                                        <div class="form-group has-feedback">
+                                                            <label class="control-label">DNI: <span class="symbol required"></span></label>
+                                                            <input required="" type="file" class="btn btn-default" data-original-title="Subir Imagen" data-rel="tooltip" placeholder="Suba su Archivo" name="dniFrente" id="dniFrente" autocomplete="nope" title="Buscar Archivo">
+
+                                                        </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group has-feedback">
+                                                    <label class="control-label">Certificado de Domicilio: <span class="symbol required"></span></label>
+                                                    <input required="" type="file" class="btn btn-default" data-original-title="Subir Imagen" data-rel="tooltip" placeholder="Suba su Archivo" name="dniFrente" id="dniFrente" autocomplete="nope" title="Buscar Archivo">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group has-feedback">
+                                                    <label class="control-label">Certificado de Servicios: <span class="symbol required"></span></label>
+                                                    <input required="" type="file" class="btn btn-default" data-original-title="Subir Imagen" data-rel="tooltip" placeholder="Suba su Archivo" name="dniFrente" id="dniFrente" autocomplete="nope" title="Buscar Archivo">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group has-feedback">
+                                                    <label class="control-label">Certificado de Residencia: <span class="symbol required"></span></label>
+                                                    <input required="" type="file" class="btn btn-default" data-original-title="Subir Imagen" data-rel="tooltip" placeholder="Suba su Archivo" name="dniFrente" id="dniFrente" autocomplete="nope" title="Buscar Archivo">
+                                                </div>
+                                            </div>
+                                                                                    
+                                          
+                                           
+                                            
+                                            
+                                    </div> 
                                        
                                     <!-- /.card-body -->
                                     <input type="hidden" name="ag" value="{{$Agente->idAgente}}"/>
@@ -208,6 +271,7 @@ ConfirmarActualizarAgente
         function cargarLocalidadesPorDefecto(dpto) {
             if(dpto){
                 var departamentoId = dpto
+               
             }else{
                 var departamentoId = $('#Departamento').val();
             }

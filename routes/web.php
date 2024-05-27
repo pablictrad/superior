@@ -33,8 +33,6 @@ Route::get('/servicio/ver/{id}',[ServicioGeneralController::class,'ver'])->name(
 Route::post('/servicio/guardar',[ServicioGeneralController::class,'guardar'])->name('guardar');
 */
 //cambios nuevos SUPERIOR
-
-
 Route::get('/registro',[RegistroSuperiorController::class,'mostrarFormulario'])->name('registro');
 Route::post('/crearregistro',[RegistroSuperiorController::class,'guardarDatos'])->name('crearregistro');
 Route::get('/editarAgente/{idAgente}',[LupController::class,'editarAgente'])->name('editarAgente');
@@ -43,6 +41,13 @@ Route::get('/traerLocalidades/{idDepto}',[LupController::class,'traerLocalidades
 //solicitar cambio de zona
 Route::get('editarZona/{idAgente}',[LupController::class,'editarZona'])->name('editarZona');
 Route::post('/FormActualizarZona_ind',[LupController::class,'FormActualizarZona_ind'])->name('FormActualizarZona_ind');
+Route::get('verdocuZona/{idAgente}',[LupController::class,'verdocuZona'])->name('verdocuZona');
+//inscripción
+Route::get('inscripcion/{idAgente}',[LupController::class,'inscripcion'])->name('inscripcion');
+Route::post('/FormInscripcion',[LupController::class,'FormInscripcion'])->name('FormInscripcion');
+//registro validar DNI
+Route::post('/buscar_agente',[AgController::class,'buscar_agente'])->name('buscar_agente');
+
 
 //controla las rutas de errores
 Route::fallback([Controller::class, 'show404']);

@@ -11,7 +11,7 @@
             <section class="content">
                 <div class="container-fluid">
                     <!-- Buscador Agente -->
-                    <h4 class="text-center display-4">Editar Usuario</h4>
+                    <h6 class="text-center display-4" style="font-weight: bold;">Editar Usuario</h6>
                     <!-- Agregar Nuevo Agente -->
                     <div class="row d-flex justify-content-center">
                         <!-- left column -->
@@ -20,8 +20,9 @@
                             <div class="card card-green">
                                 <div class="card-header">
                                     <h3 class="card-title">
-                                        Editar Usuario
+                                       Por Favor Complete o Modifique sus Datos
                                     </h3>
+                                    <p> </p>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
@@ -53,11 +54,11 @@
                                             </div>
                                             <div class="col-2">
                                                 <label for="DNI">DNI: </label>
-                                                <input type="text" autocomplete="off" class="form-control" id="DNI" name="DNI" placeholder="Ingrese DNI sin puntos" value="{{$Agente->Documento}}">
+                                                <input type="text" autocomplete="off" class="form-control" id="DNI" name="DNI" placeholder="Ingrese DNI sin puntos" value="{{$Agente->Documento}}" maxlength="8">
                                             </div>
                                              <div class="col-3">
                                                 <label for="CUIL">CUIL: </label>
-                                                <input type="text" autocomplete="off" class="form-control" id="CUIL" name="CUIL" placeholder="Ingrese Cuil" value="{{$Agente->Cuil}}">
+                                                <input type="text" autocomplete="off" class="form-control" id="CUIL" name="CUIL" placeholder="Ingrese Cuil" value="{{$Agente->Cuil}}" maxlength="11" required>
                                             </div>
                                             <div class="col-3">
                                                 <label for="Sexo">Sexo: </label>
@@ -76,15 +77,15 @@
                                         <div class="form-group row">
                                             <div class="col-4">
                                                 <label for="Barrio">Barrio: </label>
-                                                <input type="text" autocomplete="off" class="form-control" id="Barrio" name="Barrio" placeholder="Ingrese Barrio" value="{{strtoupper($Agente->Barrio)}}">
+                                                <input type="text" autocomplete="off" class="form-control" id="Barrio" name="Barrio" placeholder="Ingrese Barrio" value="{{strtoupper($Agente->Barrio)}}" required>
                                             </div>
                                             <div class="col-4">
                                                 <label for="Calle">Calle: </label>
-                                                <input type="text" autocomplete="off" class="form-control" id="Calle" name="Calle" placeholder="Ingrese Nombre de la Calle" value="{{strtoupper($Agente->Calle)}}">
+                                                <input type="text" autocomplete="off" class="form-control" id="Calle" name="Calle" placeholder="Ingrese Nombre de la Calle" value="{{strtoupper($Agente->Calle)}}" required>
                                             </div>
                                             <div class="col-2">
                                                 <label for="Casa">N° Casa/Dpto: </label>
-                                                <input type="text" autocomplete="off" class="form-control" id="NumCasa" name="NumCasa" placeholder="Ingrese Numero de Casa" value="{{$Agente->Numero_Casa}}">
+                                                <input type="text" autocomplete="off" class="form-control" id="NumCasa" name="NumCasa" placeholder="Ingrese Numero de Casa" value="{{$Agente->Numero_Casa}}" required>
                                             </div>
                                             <div class="col-2">
                                                 <label for="Piso">Piso: </label>
@@ -124,7 +125,7 @@
                                                         @else
                                                             @foreach ($Departamentos as $dep)
                                                                    
-                                                                        <option value="{{$dep->idDepartamento}}">{{$dep->nombre_dpto}}</option>
+                                                                        <option value="{{$dep->idDepartamento}}">{{$dep->nombre_dpto}} ({{$dep->zona}})</option>
                                                                     
                                                                 @endforeach
                                                         @endif
@@ -154,15 +155,15 @@
                                         <div class="form-group row">
                                             <div class="col-4">
                                                 <label for="Barrio">Correo Eléctronico: </label>
-                                                <input type="text" autocomplete="off" class="form-control" id="email" name="email" placeholder="" value="{{$usuario->email}}">
+                                                <input type="text" autocomplete="off" class="form-control" id="email" name="email" placeholder="" value="{{$usuario->email}}" required>
                                             </div>
                                             <div class="col-4">
                                                 <label for="Calle">Clave: </label>
-                                                <input type="text" autocomplete="off" class="form-control" id="Clave" name="Clave" placeholder="Ingrese la Clave" value="{{$usuario->Clave}}">
+                                                <input type="text" autocomplete="off" class="form-control" id="Clave" name="Clave" placeholder="Ingrese la Clave" value="{{$usuario->Clave}}" required>
                                             </div>
                                             <div class="col-4">
                                                 <label for="Casa">N° Teléfono: </label>
-                                                <input type="text" autocomplete="off" class="form-control" id="NumTel" name="NumTel" placeholder="Ingrese Número de Teléfono" value="{{$Agente->telefono}}">
+                                                <input type="text" autocomplete="off" class="form-control" id="NumTel" name="NumTel" placeholder="Ingrese Número de Teléfono" value="{{$Agente->telefono}}" required>
                                             </div>
                                             
                                         </div>
@@ -193,7 +194,7 @@
             <script>
             Swal.fire(
                 'Registro Actualizado',
-                'Se actualizó registro de un Agente',
+                'Se actualizaron sus Datos Correctamente',
                 'success'
                     )
             </script>

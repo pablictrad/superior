@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AgenteModel;
+use App\Models\Agentes;
 use App\Models\AsignaturaModel;
 use App\Models\EspacioCurricularModel;
 use App\Models\HorariosModel;
@@ -2076,8 +2077,24 @@ class AgController extends Controller
             ->header('Content-Disposition', 'attachment; filename="Novedades.pdf"');
         
     }
+    //validar DNI en registro
 
+    public function buscar_agente(Request $request){
+       
+        $dni = $request->input('dni');
 
+        // Realiza la búsqueda en la base de datos utilizando el modelo Agente
+        
+        $agente = Agentes::where('Documento', $dni)->first();
+
+        if ($agente) {
+            // Si se encuentra un agente con el DNI especificado, devuelve el Apellido y Nombre
+            return response()->json(array('status' => 200, 'msg' => $agente->Documento), 200);
+        } else {
+            // Si no se encuentra ningún agente, devuelve un mensaje indicando que no se encontró ningún agente con ese DNI
+            return response()->json(array('status' => 200, 'msg' => "NO"), 200);
+        }
+    }
 
 
 

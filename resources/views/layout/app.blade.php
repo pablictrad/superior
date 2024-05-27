@@ -71,9 +71,12 @@
 
   <!--bandeja principal-->
   <nav class="main-header navbar navbar-expand navbar-light brand-text font-weight-bold" style="background-color: rgb(244, 244, 202)">
+   
     <ul class="navbar-nav align-items-center" >
       <li class="nav-item"> <a href="#" class="nav-link" data-widget="pushmenu" role="button"><i class="fas fa-bars"></i></a></li>
       <li class="nav-item d-none d-sm-inline-block">
+       
+        
         <a href="#" class="nav-link h6">
           <?php
             if(isset($mensajeNAV))
@@ -90,8 +93,9 @@
     <a style="justify-content: flex-end; padding-left: 70%;"  href="{{route('Salir')}}" class="nav-link">
       <i style="color:rgb(5, 179, 83); " class="fa fa-power-off"> Cerrar</i>         
     </a>
-  </nav>
-
+   
+    </nav>
+   
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar elevation-4" style="background-color: rgb(244, 244, 202)">
     <!-- Brand Logo -->
@@ -132,8 +136,7 @@
               $ag=DB::table('tb_usuarios')
               ->join('tb_agentes','tb_agentes.Documento','=','tb_usuarios.Agente')
               ->where('idUsuario',session('idUsuario'))
-              ->first();
-              
+              ->first();              
             @endphp
            <a href="#" class="nav-link">
                <i class="nav-icon fas fa-copy" style="color: rgb(5, 179, 83);">
@@ -168,9 +171,9 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{route('editarAgente',$ag->idAgente)}}" class="nav-link">
+                  <a href="{{route('verdocuZona',$ag->idAgente)}}" class="nav-link">
                     <i class="nav-icon far fa-circle text-success"> </i> 
-                      <p style="color: black; font-weight: bold">Documentos Zona</p>
+                      <p style="color: black; font-weight: bold">Ver Documentación Zona</p>
                                     
                   </a>                 
                 </li>            
@@ -231,7 +234,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('editarAgente',$ag->idAgente)}}" class="nav-link">
+                <a href="{{route('inscripcion',$ag->idAgente)}}" class="nav-link">
                   <i class="nav-icon far fa-circle text-red"></i>
                   <p style="color: black; font-weight: bold">Altas</p>
                 </a>
@@ -268,6 +271,12 @@
           <!--inicio usuario Administrador superior-->
 
         @if (session('Modo')==8)
+        @php
+          $ag=DB::table('tb_usuarios')
+          ->join('tb_agentes','tb_agentes.Documento','=','tb_usuarios.Agente')
+          ->where('idUsuario',session('idUsuario'))
+          ->first();        
+        @endphp
         <li class="nav-item menu-is-opening menu-open">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy" style="color: rgb(5, 179, 83);">

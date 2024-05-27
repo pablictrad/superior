@@ -990,7 +990,7 @@ class LupController extends Controller
          $Agente->cambio_Piso = $request->Piso;
          $Agente->cambio_Numero_Dpto = $request->numero_piso;
          $Agente->cambio_Localidad = $request->Localidad;
-         
+         $Agente->cambio_idDpto = $request->Departamento;
      $Agente->save();
 
      //debo modificar en su copia que es el desglose
@@ -1007,8 +1007,62 @@ class LupController extends Controller
 
          $idAg = $request->ag;
          return redirect("/editarZona/$idAg")->with('ConfirmarActualizarAgente','OK');
-     
- }
+    }
+
+    //ver documentos zona
+    public function verdocuZona($idAgente) {
+        return view('bandeja.LUP.verDocuZona');
+    }
+    //inscripción de la zona  de docente traer zona
+    public function inscripcion($idAgente) {
+        $Localidades = DB::table('tb_localidades') ->orderBy('tb_localidades.localidad','ASC')->get();
+        $Departamentos = DB::table('tb_departamentos') ->orderBy('tb_departamentos.nombre_dpto','ASC')->get();
+        $Provincias = DB::table('tb_provincias')->get();
+
+        $Agente = DB::table('tb_agentes')
+        ->where('tb_agentes.idAgente',$idAgente) //es and
+        ->first();
+
+        $usu = DB::table('tb_usuarios')
+        ->where('tb_usuarios.idUsuario',session('idUsuario')) //es and
+        ->first();
+        //dd($RelSubOrgAgente);
+        $datos=array(
+            'mensajeError'=>"",
+            'mensajeNAV'=>'Panel de Inscripción',
+            'Agente'=>$Agente,            
+            'Localidades'=>$Localidades,
+            'Departamentos'=>$Departamentos,
+            'Provincias'=>$Provincias
+            
+        );
+        return view('bandeja.LUP.inscripcion', $datos);
+    }
+   //cargar la inscripcion
+   public function FormInscripcion(Request $request){
+    $Agente = AgenteRespaldoModel::where('idAgente',$request->ag)->first();
+             
+      
+        $Agente->cambio_Numero_Dpto = $request->numero_piso;
+        $Agente->cambio_Localidad = $request->Localidad;
+        $Agente->cambio_idDpto = $request->Departamento;
+    $Agente->save();
+
+    //debo modificar en su copia que es el desglose
+    $agecop = AgenteModel::where('docu',$request->DNI)->get();
+
+        if($agecop){
+            foreach($agecop as $ag){
+                //$ag = AgenteModel::where('idDesgloseAgente',$agecop->idDesgloseAgente)->first();
+                    $ag->nomb = $request->Agente;            //por ahora no lo dejare modificar
+                    $ag->cuil = $request->CUIL; 
+                $ag->save();
+            }
+        }
+
+        $idAg = $request->ag;
+        return redirect("/FormInscripcion/$idAg")->with('ConfirmarActualizarAgente','OK');
+   }
 
 
 
