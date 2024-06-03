@@ -16,15 +16,14 @@
                         <div class="row" style="font-weight: bold; text-align: justify; font-family: 'Times New Roman', Times, serif; width: 100%; align-content: center; align-items: center;">
                             <div class="alert alert-success alert-dismissible " style="padding: 2%; padding-bottom: 0%; width: 100%;">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                              <h5 style="font-weight: bold; color:blue;"><i class="icon fas fa-info" style="font-weight: bold; color:blue; "></i>Información Importante!    LOS REQUISITOS PARA EL CAMBIO DE ZONA ESTÁN REGULADOS POR LA LEY N° 6436/01 Y DECRETO N°376/01:</h5>
-                             <br/>
-                              LA DOCUMENTACIÓN A PRESENTAR PARA SOLICITAR EL CAMBIO DE ZONA ES LA SIGUIENTE:<br/>
-                                <ol>
+                              <h5 style="font-weight: bold; color:blue; text-align: center; align-items: center;" ><i class="icon fas fa-info"></i>INFORMACIÓN IMPORTANTE! <br/>   Los Requisitos Para El Cambio De Zona Están Regulados Por La Ley N° 6436/01 y Decreto N°376/01</h5>
+                            
+                             <h6 style="font-weight: bold; margin-left: 7%; "> La Documentación a Presentar Para Solicitar El Cambio De Zona Es La Siguiente:</h6>
+                                <ol style="margin-left: 10%;">
                                    <li>La fotocopia de DNI (Debe estar certificada en el Registro Civil).</li>                                  
-                                   <li>Factura de Servicios.</li>
-                                  
+                                   <li>Factura de Servicios.</li>                                  
                               </ol>
-                              <p style="padding-top: -4%; font-family: 'Arial Narrow Bold', sans-serif;">El archivo a cargar debe ser extensión pdf y No debe ser mayor de 2 MB.
+                              <p style="font-family: 'Arial Narrow Bold', sans-serif; font-weight: bolder; text-align: center;">El archivo a cargar debe ser extensión pdf y No debe ser mayor de 2 MB.
                               </p>
                             </div>       
                         </div>

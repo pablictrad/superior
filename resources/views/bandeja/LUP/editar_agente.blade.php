@@ -11,7 +11,7 @@
             <section class="content">
                 <div class="container-fluid">
                     <!-- Buscador Agente -->
-                    <h6 class="text-center display-4" style="font-weight: bold;">Editar Usuario</h6>
+                   
                     <!-- Agregar Nuevo Agente -->
                     <div class="row d-flex justify-content-center">
                         <!-- left column -->
@@ -19,10 +19,7 @@
                             <!-- general form elements -->
                             <div class="card card-green">
                                 <div class="card-header">
-                                    <h3 class="card-title">
-                                       Por Favor Complete o Modifique sus Datos
-                                    </h3>
-                                    <p> </p>
+                                     <h2 class="text-center" style="font-weight: bold; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Datos Personales</h2>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
@@ -48,6 +45,9 @@
                                     <div class="card-body" id="NuevoAgenteContenido1" style="display:visible">
                                         <!-- fila1 -->
                                         <div class="form-group row">
+                                            <div class="col-10">
+                                                <h3 class="card-title"> Por Favor Complete o Actualice sus Datos</h3>
+                                            </div>
                                             <div class="col-4">
                                                 <label for="Agente">Apellido Y Nombre: </label>
                                                 <input type="text" autocomplete="off" class="form-control" id="Agente" name="Agente" placeholder="Ingrese Nombre Completo" value="{{strtoupper($Agente->ApeNom)}}">
@@ -74,6 +74,7 @@
                                             </div>
                                         </div>
                                         <!-- Fila2 -->
+                                        
                                         <div class="form-group row">
                                             <div class="col-4">
                                                 <label for="Barrio">Barrio: </label>
