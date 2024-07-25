@@ -26,8 +26,8 @@
                                 @php
                                     //voy a realizar una preconsulta para saber su dpto a parti de la localidad
                                     $infoDpto =DB::table('tb_localidades')
-                                    ->join('tb_departamentos','tb_departamentos.idDepartamento','=','tb_localidades.Departamento')
-                                    ->where('idLocalidad',$Agente->Localidad)
+                                    ->join('tb_departamentos','tb_departamentos.idDepartamento','=','tb_localidades.idDepartamento')
+                                    //->where('idLocalidad',$Localidades->localidad)
                                     ->select('tb_departamentos.idDepartamento as Departamento','tb_localidades.idLocalidad as Localidad')
                                     ->first();
                                    // dd($infoDpto);
@@ -64,7 +64,7 @@
                                                 <label for="Sexo">Sexo: </label>
                                                 <select class="form-control" name="Sexo" id="Sexo">
                                                     @foreach ($Sexos as $s)
-                                                        @if ($s->Mnemo == $Agente->Sexo)
+                                                        @if ($s->Mnemo == $Agente->idSexo)
                                                             <option value="{{$s->Mnemo}}" selected="selected">{{$s->Descripcion}}</option>
                                                         @else
                                                             <option value="{{$s->Mnemo}}">{{$s->Descripcion}}</option>
@@ -78,19 +78,19 @@
                                         <div class="form-group row">
                                             <div class="col-4">
                                                 <label for="Barrio">Barrio: </label>
-                                                <input type="text" autocomplete="off" class="form-control" id="Barrio" name="Barrio" placeholder="Ingrese Barrio" value="{{strtoupper($Agente->Barrio)}}" required>
+                                                <input type="text" autocomplete="off" class="form-control" id="Barrio" name="Barrio" placeholder="Ingrese Barrio" value="{{strtoupper($domicilio->barrio)}}" required>
                                             </div>
                                             <div class="col-4">
                                                 <label for="Calle">Calle: </label>
-                                                <input type="text" autocomplete="off" class="form-control" id="Calle" name="Calle" placeholder="Ingrese Nombre de la Calle" value="{{strtoupper($Agente->Calle)}}" required>
+                                                <input type="text" autocomplete="off" class="form-control" id="Calle" name="Calle" placeholder="Ingrese Nombre de la Calle" value="{{strtoupper($domicilio->calle)}}" required>
                                             </div>
                                             <div class="col-2">
                                                 <label for="Casa">N° Casa/Dpto: </label>
-                                                <input type="text" autocomplete="off" class="form-control" id="NumCasa" name="NumCasa" placeholder="Ingrese Numero de Casa" value="{{$Agente->Numero_Casa}}" required>
+                                                <input type="text" autocomplete="off" class="form-control" id="NumCasa" name="NumCasa" placeholder="Ingrese Numero de Casa" value="{{$domicilio->numCasa_piso}}" required>
                                             </div>
                                             <div class="col-2">
                                                 <label for="Piso">Piso: </label>
-                                                <input type="text" autocomplete="off" class="form-control" id="Piso" name="Piso" placeholder="Ingrese Piso" value="{{$Agente->Piso}}">
+                                                <input type="text" autocomplete="off" class="form-control" id="Piso" name="Piso" placeholder="Ingrese Piso" value="{{$domicilio->piso}}">
                                             </div>
                                             
                                         </div>
@@ -140,7 +140,7 @@
                                                     
                                                         @if ($infoDpto)
                                                             @foreach ($Localidades as $loc)
-                                                                @if($Agente->Localidad == $loc->idLocalidad)
+                                                                @if($domicilio->idLocalidad == $loc->idLocalidad)
                                                                     <option value="{{$loc->idLocalidad}}" selected="selected">{{$loc->localidad}}</option>
                                                                 @else
                                                                     <option value="{{$loc->idLocalidad}}">{{$loc->localidad}}</option>

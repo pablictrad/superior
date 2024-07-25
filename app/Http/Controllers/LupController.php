@@ -853,17 +853,19 @@ class LupController extends Controller
    }
    public function editarAgente($idAgente){
            //extras a enviar
-           $TiposDeDocumentos = DB::table('tb_tiposdedocumento')->get();
-           $TiposDeAgentes = DB::table('tb_tiposdeagente')->get();
+          // $TiposDeDocumentos = DB::table('tb_tiposdedocumento')->get();
+         //  $TiposDeAgentes = DB::table('tb_tiposdeagente')->get();
            $Sexos = DB::table('tb_sexo')->get();
-           $EstadosCiviles = DB::table('tb_estadosciviles')->get();
-           $Nacionalidades = DB::table('tb_nacionalidad')->get();
-           $TurnosUsuario = DB::table('tb_turnos_usuario')->get();
+          // $EstadosCiviles = DB::table('tb_estadosciviles')->get();
+          // $Nacionalidades = DB::table('tb_nacionalidad')->get();
+          // $TurnosUsuario = DB::table('tb_turnos_usuario')->get();
    
            $Localidades = DB::table('tb_localidades') ->orderBy('tb_localidades.localidad','ASC')->get();
            $Departamentos = DB::table('tb_departamentos') ->orderBy('tb_departamentos.nombre_dpto','ASC')->get();
            $Provincias = DB::table('tb_provincias')->get();
-   
+           $Domicilio = DB::table('tb_domicilio')
+           ->where('tb_domicilio.idAgente',$idAgente)
+           ->first();
            $Agente = DB::table('tb_agentes')
            ->where('tb_agentes.idAgente',$idAgente) //es and
            ->first();
@@ -880,7 +882,8 @@ class LupController extends Controller
                'Sexos'=>$Sexos,
                'Localidades'=>$Localidades,
                'Departamentos'=>$Departamentos,
-               'Provincias'=>$Provincias
+               'Provincias'=>$Provincias,
+               'domicilio'=>$Domicilio
                
            );
            //dd($infoPlaza);
@@ -909,13 +912,13 @@ class LupController extends Controller
             $Agente->ApeNom = $request->Agente;
             //$Agente->Documento = $request->DNI;                       //por ahora no lo dejare modificar
             $Agente->Cuil = $request->CUIL; 
-            $Agente->Sexo = $request->Sexo;
-            $Agente->Barrio = $request->Barrio;
-            $Agente->Calle = $request->Calle;
-            $Agente->Numero_Casa = $request->NumCasa;
-            $Agente->Piso = $request->Piso;
-            $Agente->Numero_Dpto = $request->numero_piso;
-            $Agente->Localidad = $request->Localidad;
+            $Agente->idSexo = $request->Sexo;
+          // $Agente->barrio = $request->Barrio;
+        //  $Agente->calle = $request->Calle;
+          //  $Agente->Numero_Casa = $request->NumCasa;
+          //  $Agente->Piso = $request->Piso;
+         //   $Agente->Numero_Dpto = $request->numero_piso;
+            //$Agente->Localidad = $request->Localidad;
             $Agente->telefono = $request->NumTel;
         $Agente->save();
 

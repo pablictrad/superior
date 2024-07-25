@@ -101,9 +101,8 @@
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
       <img src="{{ asset('dist/img/logo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span style="color: black;" class="brand-text font-weight-bold">{{session('NombreModo')}}</span>
     </a>
-
+    <span style="color: black;" class="brand-text font-weight-bold">Panel Docente</span>
     <!-- Sidebar -->
     <div class="sidebar" style="background-color: hsl(64, 44%, 88%);">
       <!-- Sidebar user panel (optional) -->
@@ -277,6 +276,7 @@
           ->where('idUsuario',session('idUsuario'))
           ->first();        
         @endphp
+   
         <li class="nav-item menu-is-opening menu-open">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy" style="color: rgb(5, 179, 83);">

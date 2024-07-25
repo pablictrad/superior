@@ -48,7 +48,7 @@ class RegistroSuperiorController extends Controller
                 $na->Clave = $request->clave;
                 $na->Agente = $request->Documento;
                 $na->Modo = 7;
-                $na->Turno = 1;
+               // $na->Turno = 1;
                // $na->Turno = 1;
             $na->save();
 

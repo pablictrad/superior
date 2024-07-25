@@ -35,8 +35,8 @@ class LoginController extends Controller
         if($request->email!="" && $request->clave!=""){
             $usuario= UsuarioModel::where('email',$request->email)
             ->where('Clave',$request->clave)
-            ->join('tb_turnos_usuario', 'tb_turnos_usuario.idTurnoUsuario', 'tb_usuarios.Turno') 
-            ->join('tb_modos', 'tb_modos.idModo', 'tb_usuarios.Modo')        //no olvidar dar turno
+            //->join('tb_turnos_usuario', 'tb_turnos_usuario.idTurnoUsuario', 'tb_usuarios.Turno') 
+            //->join('tb_modos', 'tb_modos.idModo', 'tb_usuarios.Modo')        //no olvidar dar turno
             ->get();
             //dd($usuario);
             $cantidadEncontrados=count($usuario);

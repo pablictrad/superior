@@ -14,12 +14,12 @@ class AdminController extends Controller
 {
     public function nuevoUsuario(){
         //extras a enviar
-        $TiposDeDocumentos = DB::table('tb_tiposdedocumento')->get();
-        $TiposDeAgentes = DB::table('tb_tiposdeagente')->get();
+        //$TiposDeDocumentos = DB::table('tb_tiposdedocumento')->get();
+       // $TiposDeAgentes = DB::table('tb_tiposdeagente')->get();
         $Sexos = DB::table('tb_sexo')->get();
-        $EstadosCiviles = DB::table('tb_estadosciviles')->get();
-        $Nacionalidades = DB::table('tb_nacionalidad')->get();
-        $TurnosUsuario = DB::table('tb_turnos_usuario')->get();
+        //$EstadosCiviles = DB::table('tb_estadosciviles')->get();
+        //$Nacionalidades = DB::table('tb_nacionalidad')->get();
+       // $TurnosUsuario = DB::table('tb_turnos_usuario')->get();
         //se agrego el 18 abril
         /*$RelSubOrgAgente = DB::table('tb_suborg_agente')
         ->join('tb_agentes', 'tb_agentes.idAgente', '=', 'tb_suborg_agente.idAgente')
@@ -38,7 +38,7 @@ class AdminController extends Controller
         $datos=array(
             'mensajeError'=>"",
             'mensajeNAV'=>'Panel de Creación de Usuarios',
-            'TurnosUsuario'=>$TurnosUsuario
+          //  'TurnosUsuario'=>$TurnosUsuario
             //'RelSubOrgAgente'=>$RelSubOrgAgente
         );
         //dd($infoPlaza);
@@ -47,12 +47,12 @@ class AdminController extends Controller
 
     public function editarUsuario($idUsuario){
         //extras a enviar
-        $TiposDeDocumentos = DB::table('tb_tiposdedocumento')->get();
-        $TiposDeAgentes = DB::table('tb_tiposdeagente')->get();
+     //   $TiposDeDocumentos = DB::table('tb_tiposdedocumento')->get();
+    //    $TiposDeAgentes = DB::table('tb_tiposdeagente')->get();
         $Sexos = DB::table('tb_sexo')->get();
-        $EstadosCiviles = DB::table('tb_estadosciviles')->get();
-        $Nacionalidades = DB::table('tb_nacionalidad')->get();
-        $TurnosUsuario = DB::table('tb_turnos_usuario')->get();
+    //    $EstadosCiviles = DB::table('tb_estadosciviles')->get();
+      //  $Nacionalidades = DB::table('tb_nacionalidad')->get();
+     //   $TurnosUsuario = DB::table('tb_turnos_usuario')->get();
        
         $Usuario = DB::table('tb_usuarios')
         ->where('tb_usuarios.Modo','!=',2)
